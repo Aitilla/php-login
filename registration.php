@@ -44,10 +44,6 @@
                 //Ugyldig login
                 echo "Noe gikk galt, prøv igjen!";
             }
-
-
-
-
         }
     ?>
 </html>

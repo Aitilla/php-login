@@ -1,4 +1,7 @@
-
+<?php
+$active_page = 'registration';
+include_once 'header.php';
+?>
 <html>
     <head>
         <link rel="stylesheet" href="style.css">
@@ -6,16 +9,15 @@
         <title>PHP Innlogging</title>
     </head>
     <body>
-        <p>Vennligst logg inn:</p>
+        <p>Opprett ny bruker:</p>
         <form method="post">
             <label for="brukernavn">Brukernavn:</label>
             <input type="text" name="brukernavn" /><br />
             <label for="passord">Passord:</label>
             <input type="password" name="passord" /><br />
-            
+
             <input type="submit" value="Logg inn" name="submit" />
-        </form>
-        <p>Eller klikk <a href="registration.php">her</a> for å registrere ny bruker            
+        </form>    
     </body>
     <?php
         if(isset($_POST['submit'])){
@@ -28,7 +30,7 @@
               or die('Error connecting to MySQL server.');
             
             //Gjøre klar SQL-strengen
-            $query = "SELECT username, password from users where username='$brukernavn' and password='$passord'";
+            $query = "INSERT INTO users VALUES ('$brukernavn','$passord')";
             
             //Utføre spørringen
             $result = mysqli_query($dbc, $query)
@@ -38,13 +40,17 @@
             mysqli_close($dbc);
 
             //Sjekke om spørringen gir resultater
-            if($result->num_rows > 0){
+            if($result){
                 //Gyldig login
-                header('location: success.html');
+                echo "Takk for at du lagde bruker! Trykk <a href='index.php'>her</a> for å logge inn";
             }else{
                 //Ugyldig login
-                header('location: failure.html');
+                echo "Noe gikk galt, prøv igjen!";
             }
+
+
+
+
         }
     ?>
 </html>

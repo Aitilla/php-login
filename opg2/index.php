@@ -1,4 +1,7 @@
-
+<?php
+$active_page = 'login';
+include_once 'header.php';
+?>
 <html>
     <head>
         <link rel="stylesheet" href="style.css">
@@ -15,7 +18,8 @@
             
             <input type="submit" value="Logg inn" name="submit" />
         </form>
-        <p>Eller klikk <a href="registration.php">her</a> for å registrere ny bruker            
+        <p>Eller klikk <a href="registration.php">her</a> for å registrere ny bruker
+            
     </body>
     <?php
         if(isset($_POST['submit'])){
@@ -37,10 +41,20 @@
             //Koble fra databasen
             mysqli_close($dbc);
 
+            $row = $result->fetch_assoc();
+            $username = $row['username'];
+            $password = $row['password'];
+            
+
+
             //Sjekke om spørringen gir resultater
             if($result->num_rows > 0){
                 //Gyldig login
-                header('location: success.html');
+                session_start();
+                $_SESSION['username'] = $username;
+                $_SESSION['password'] = $password;
+                
+                header('location: editprofile.php');
             }else{
                 //Ugyldig login
                 header('location: failure.html');
