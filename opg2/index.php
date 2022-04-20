@@ -5,6 +5,7 @@ include_once 'header.php';
 
 <p>Vennligst logg inn:</p>
 <form method="post">
+    
     <label for="brukernavn">Brukernavn:</label>
     <input type="text" name="brukernavn" /><br />
     <label for="passord">Passord:</label>
