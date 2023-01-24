@@ -23,7 +23,7 @@
             $passord = $_POST['passord'];
             
             //Koble til databasen
-            $dbc = mysqli_connect('localhost', 'root', '', 'mydb')
+            $dbc = mysqli_connect('localhost', 'root', '', 'logindb')
               or die('Error connecting to MySQL server.');
             
             //Gjøre klar SQL-strengen
